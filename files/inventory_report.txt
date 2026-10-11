@@ -1,0 +1,18 @@
+ №   Артыкул   Найменне тавару   Вытворца      Колькасць   Агульны кошт
+ 1   M-001     G Pro Wireless    Logitech             15        5257.50
+ 2   M-002     DeathAdder V3     Razer                22        6160.00
+ 3   M-003     MX Master 3S      Logitech             12        5040.00
+ 4   M-004     Pulsar X2         Pulsar                9        2790.00
+ 5   K-012     Apex Pro TKL      SteelSeries           8        4800.00
+ 6   K-013     BlackWidow V4     Razer                11        5940.00
+ 7   K-014     K380              Logitech             30        3600.00
+ 8   K-015     Wooting 60HE      Wooting               4        2880.00
+ 9   MO-05     UltraGear 27      LG                    5        4750.00
+10   MO-06     Odyssey G5        Samsung               7        6160.00
+11   MO-07     VG249Q            ASUS                 10        6400.00
+12   MO-08     U2723QE           Dell                  3        4350.00
+13   CPU-9     Ryzen 5 5600X     AMD                  20       11000.00
+14   CPU-10    Core i5-12400F    Intel                18        8640.00
+15   CPU-11    Ryzen 7 7800X3D   AMD                   6        8700.00
+16   CPU-12    Core i7-13700K    Intel                 5        6500.00
+                                 ЗАГАЛАМ:            185       92967.50

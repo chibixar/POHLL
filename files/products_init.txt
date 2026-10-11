@@ -1,0 +1,17 @@
+ ID   ID_кат   Артыкул   Найменне          Вытворца         Кошт   Колькасць   Тып          Спец_хар-ка
+101        1   M-001     G Pro Wireless    Logitech       350.50          15   Мыш                25600
+102        1   M-002     DeathAdder V3     Razer          280.00          22   Мыш                30000
+103        1   M-003     MX Master 3S      Logitech       420.00          12   Мыш                 8000
+104        1   M-004     Pulsar X2         Pulsar         310.00           9   Мыш                26000
+201        2   K-012     Apex Pro TKL      SteelSeries    600.00           8   Клавіятура             1
+202        2   K-013     BlackWidow V4     Razer          540.00          11   Клавіятура             1
+203        2   K-014     K380              Logitech       120.00          30   Клавіятура             0
+204        2   K-015     Wooting 60HE      Wooting        720.00           4   Клавіятура             2
+301        3   MO-05     UltraGear 27      LG             950.00           5   Манітор              144
+302        3   MO-06     Odyssey G5        Samsung        880.00           7   Манітор              165
+303        3   MO-07     VG249Q            ASUS           640.00          10   Манітор              144
+304        3   MO-08     U2723QE           Dell          1450.00           3   Манітор               60
+401        4   CPU-9     Ryzen 5 5600X     AMD            550.00          20   Працэсар            3700
+402        4   CPU-10    Core i5-12400F    Intel          480.00          18   Працэсар            2500
+403        4   CPU-11    Ryzen 7 7800X3D   AMD           1450.00           6   Працэсар            4200
+404        4   CPU-12    Core i7-13700K    Intel         1300.00           5   Працэсар            3400
