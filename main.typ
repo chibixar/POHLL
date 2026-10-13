@@ -207,62 +207,62 @@
 - файл products.bin: пабайтавае захаванне актуальнага масіва запісаў аб камплектуючых;
 - файл logs.txt: даданне запісаў з фіксацыяй часу, тыпу аперацыі і статусу яе выканання.
 
-#figure(
-  {
-    set text(size: 11pt)
-    set par(justify: false)
-    set table(inset: (x: 5pt, y: 4.5pt), stroke: 0.5pt)
+// #figure(
+//   {
+//     set text(size: 11pt)
+//     set par(justify: false)
+//     set table(inset: (x: 5pt, y: 4.5pt), stroke: 0.5pt)
     
-    table(
-      columns: (1.2fr, 1.8fr),
-      align: left + horizon,
-      table.header(
-        repeat: true,
-        table.cell(colspan: 2, align: center)[*Структуры, тыпы дадзеных і канстанты дадатку*]
-      ),
+//     table(
+//       columns: (1.2fr, 1.8fr),
+//       align: left + horizon,
+//       table.header(
+//         repeat: true,
+//         table.cell(colspan: 2, align: center)[*Структуры, тыпы дадзеных і канстанты дадатку*]
+//       ),
 
-      // Блок сістэмных канстант
-      table.cell(rowspan: 5)[*Канстанты прыкладання* \ (Абмежаванні палёў)],
-      [const int NAME_LEN = 64 (Максімальная даўжыня назвы і вытворцы)],
-      [const int ARTICLE_LEN = 16 (Максімальная даўжыня артыкула)],
-      [const int MIN_PRICE = 0, MAX_PRICE = 100000 (Межы кошту тавару)],
-      [const int MIN_QUANTITY = 0, MAX_QUANTITY = 10000 (Межы колькасці)],
-      [const int DESC_LEN = 128 (Даўжыня апісання катэгорыі)],
+//       // Блок сістэмных канстант
+//       table.cell(rowspan: 5)[*Канстанты прыкладання* \ (Абмежаванні палёў)],
+//       [const int NAME_LEN = 64 (Максімальная даўжыня назвы і вытворцы)],
+//       [const int ARTICLE_LEN = 16 (Максімальная даўжыня артыкула)],
+//       [const int MIN_PRICE = 0, MAX_PRICE = 100000 (Межы кошту тавару)],
+//       [const int MIN_QUANTITY = 0, MAX_QUANTITY = 10000 (Межы колькасці)],
+//       [const int DESC_LEN = 128 (Даўжыня апісання катэгорыі)],
 
-      // enum ComponentType
-      table.cell(rowspan: 4)[*enum ComponentType* \ (Тып камплектуючага)], 
-      [TYPE_MOUSE (Камп'ютарная мыш)],
-      [TYPE_KEYBOARD (Клавіятура)],
-      [TYPE_MONITOR (Манітор)],
-      [TYPE_PROCESSOR (Працэсар)],
+//       // enum ComponentType
+//       table.cell(rowspan: 4)[*enum ComponentType* \ (Тып камплектуючага)], 
+//       [TYPE_MOUSE (Камп'ютарная мыш)],
+//       [TYPE_KEYBOARD (Клавіятура)],
+//       [TYPE_MONITOR (Манітор)],
+//       [TYPE_PROCESSOR (Працэсар)],
 
-      // struct CategoryRecord
-      table.cell(rowspan: 3)[*struct CategoryRecord* \ (Звесткі пра катэгорыю)], 
-      [int category_id (Унікальны нумар катэгорыі)],
-      [char category_name\[NAME_LEN\] (Назва катэгорыі)],
-      [char description\[DESC_LEN\] (Кароткае апісанне)],
+//       // struct CategoryRecord
+//       table.cell(rowspan: 3)[*struct CategoryRecord* \ (Звесткі пра катэгорыю)], 
+//       [int category_id (Унікальны нумар катэгорыі)],
+//       [char category_name\[NAME_LEN\] (Назва катэгорыі)],
+//       [char description\[DESC_LEN\] (Кароткае апісанне)],
 
-      // struct ProductRecord
-      table.cell(rowspan: 9)[*struct ProductRecord* \ (Запіс аб тавары для захавання ў файл)], 
-      [int product_id (Унікальны нумар тавару)],
-      [int category_id (Нумар катэгорыі тавару)],
-      [char article\[ARTICLE_LEN\] (Артыкул прадукту)],
-      [char name\[NAME_LEN\] (Найменне камплектуючага)],
-      [char manufacturer\[NAME_LEN\] (Вытворца)],
-      [double price (Кошт за адзінку)],
-      [int quantity (Колькасць на складзе)],
-      [ComponentType type (Тып камплектуючага)],
-      [int spec_value (Спец. характарыстыка: DPI, Гц, МГц і г.д.)],
+//       // struct ProductRecord
+//       table.cell(rowspan: 9)[*struct ProductRecord* \ (Запіс аб тавары для захавання ў файл)], 
+//       [int product_id (Унікальны нумар тавару)],
+//       [int category_id (Нумар катэгорыі тавару)],
+//       [char article\[ARTICLE_LEN\] (Артыкул прадукту)],
+//       [char name\[NAME_LEN\] (Найменне камплектуючага)],
+//       [char manufacturer\[NAME_LEN\] (Вытворца)],
+//       [double price (Кошт за адзінку)],
+//       [int quantity (Колькасць на складзе)],
+//       [ComponentType type (Тып камплектуючага)],
+//       [int spec_value (Спец. характарыстыка: DPI, Гц, МГц і г.д.)],
 
-      // struct ReportEntry
-      table.cell(rowspan: 3)[*struct ReportEntry* \ (Запіс зводнай справаздачы)], 
-      [char article\[ARTICLE_LEN\] (Артыкул тавару)],
-      [char name\[NAME_LEN\] (Найменне камплектуючага)],
-      [double total_value (Агульны кошт рэшткаў (price \* quantity))]
-    )
-  },
-  caption: [Склад структур, тыпаў дадзеных і канстант дадатку]
-)
+//       // struct ReportEntry
+//       table.cell(rowspan: 3)[*struct ReportEntry* \ (Запіс зводнай справаздачы)], 
+//       [char article\[ARTICLE_LEN\] (Артыкул тавару)],
+//       [char name\[NAME_LEN\] (Найменне камплектуючага)],
+//       [double total_value (Агульны кошт рэшткаў (price \* quantity))]
+//     )
+//   },
+//   caption: [Склад структур, тыпаў дадзеных і канстант дадатку]
+// )
 
 Для нагляднага прадстаўлення арганізацыі дадзеных ніжэй прыведзены макеты і прыклады запаўнення ўсіх рабочых файлаў сістэмы ў выглядзе табліц.
 
@@ -386,7 +386,7 @@
 
 #pagebreak()
 
-== 2.2 Распрацоўка іерархіі класаў і архітэктуры
+== Распрацоўка іерархіі класаў і архітэктуры
 
 У адпаведнасці з патрабаваннямі да аб'ектна-арыентаванай мадэлі, у праграме распрацавана іерархія класаў, якая складаецца з трох узроўняў наследавання. 
 
