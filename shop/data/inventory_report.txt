@@ -1,0 +1,17 @@
+No   Article   Name                              Manufacturer         Qty         Total
+1    M-001     G Pro Wireless                    Logitech              15       5257.50
+2    M-002     DeathAdder V2                     Razer                 22       3960.00
+3    M-003     Viper Mini                        Razer                 30       3300.00
+4    K-012     Apex Pro TKL                      SteelSeries            8       4800.00
+5    K-013     Alloy Origins                     HyperX                14       4340.00
+6    K-014     K120                              Logitech              50       2250.00
+7    MO-05     UltraGear 27                      LG                     5       4750.00
+8    MO-06     TUF Gaming VG249                  ASUS                  11       6820.00
+9    MO-07     Odyssey G5                        Samsung                7       5810.00
+10   CPU-9     Ryzen 5 5600X                     AMD                   20      11000.00
+11   CPU-10    Core i5-12400F                    Intel                 18       8820.00
+12   CPU-11    Ryzen 7 5800X3D                   AMD                    6       6300.00
+13   RAM-1     Vengeance LPX 16GB DDR4           Corsair               25       3000.00
+14   RAM-2     Fury Beast 32GB DDR5              Kingston              12       3120.00
+
+Итого позиций: 14, общая стоимость: 73527.50

@@ -1,0 +1,342 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 2121" width="420mm" height="297mm">
+    <style>
+        rect, polygon, path, line, circle, polyline { fill: none; stroke: black; stroke-width: 1.5; }
+        text { font-family: Arial, sans-serif; font-size: 14px; fill: black; stroke: none; text-anchor: middle; }
+        .s { font-size: 11px; }
+        .t { font-size: 10px; }
+        .l { text-anchor: start; }
+        .r { text-anchor: end; }
+        .d { stroke-dasharray: 2,4; }
+        .bg { fill: white; stroke: none; }
+    </style>
+    <rect class="bg" x="0" y="0" width="3000" height="2121"/>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 10,5 L 0,10 Z" style="fill: black; stroke: none;" />
+        </marker>
+        <rect id="term" x="-120" y="-30" width="240" height="60" rx="30" ry="30" />
+        <rect id="rect" x="-120" y="-60" width="240" height="120" />
+        <g id="proc">
+            <rect x="-120" y="-60" width="240" height="120" />
+            <line x1="-90" x2="-90" y1="-60" y2="60" />
+            <line x1="90" x2="90" y1="-60" y2="60" />
+        </g>
+        <polygon id="rhomb" points="0,-60 120,0 0,60 -120,0" />
+        <polygon id="io" points="-90,-60 120,-60 90,60 -120,60" />
+        <circle id="conn" cx="0" cy="0" r="25" />
+    </defs>
+    <!-- ===== ЧАСТКА 1: разбор categories.txt ===== -->
+    <g transform="translate(120,0)">
+
+    <!-- ===== КАЛОНКА 1 (x=250): разбор categories.txt ===== -->
+    <g transform="translate(250,100)"><use href="#term"/><text y="5">Пачатак</text></g>
+
+    <g transform="translate(250,300)"><use href="#rect"/>
+        <text class="t" y="-22">Ув: categories.txt, файлы катэгорый;</text>
+        <text class="t" y="-6">Лак.: cat, in, line, line_no, parts,</text>
+        <text class="t" y="10">info, item, ss, bad;</text>
+        <text class="t" y="26">Вых: size_t bad — колькасць памылак</text>
+    </g>
+
+    <g transform="translate(250,500)"><use href="#io"/>
+        <text class="s" y="-3">Адкрыць файл categories.txt:</text>
+        <text class="s" y="11">cat = ifstream(path(...))</text>
+    </g>
+
+    <g transform="translate(250,700)"><use href="#rhomb"/>
+        <text class="s" y="-3">Файл не адкрыты</text>
+        <text class="s" y="11">(!cat)?</text>
+    </g>
+
+    <g transform="translate(250,900)"><use href="#rect"/>
+        <text class="s" y="-10">Ініцыял.: ачысціць items_,</text>
+        <text class="s" y="4">categories_, sku_tree_, history_;</text>
+        <text class="s" y="18">прысвоіць значэнне bad = 0</text>
+    </g>
+
+    <g transform="translate(250,1100)"><use href="#rhomb"/>
+        <text class="s" y="-3">Ёсць радок у cat?</text>
+        <text class="s" y="11">getline(cat, line)</text>
+    </g>
+
+    <g transform="translate(250,1300)"><use href="#rhomb"/>
+        <text class="s" y="-3">Радок line пусты?</text>
+        <text class="s" y="11">trim(line).empty()</text>
+    </g>
+
+    <g transform="translate(250,1500)"><use href="#rect"/>
+        <text class="s" y="-3">Падзяліць радок па ';':</text>
+        <text class="s" y="11">parts = split(line, ';')</text>
+    </g>
+
+    <g transform="translate(250,1700)"><use href="#rhomb"/>
+        <text class="s" y="-3">Радок няпоўны?</text>
+        <text class="s" y="11">parts.size() &lt; 3</text>
+    </g>
+
+    <g transform="translate(250,1900)"><use href="#rect"/>
+        <text class="s" y="-24">Прысвоіць палям info:</text>
+        <text class="s" y="-8">id = parse_int(parts[0]);</text>
+        <text class="s" y="8">name = parts[1];</text>
+        <text class="s" y="24">file = parts[2]</text>
+    </g>
+
+    <!-- стрэлкі калонкі 1 -->
+    <path d="M250,130 L250,235" marker-end="url(#arrow)"/>
+    <path d="M250,360 L250,435" marker-end="url(#arrow)"/>
+    <path d="M250,560 L250,635" marker-end="url(#arrow)"/>
+    <path d="M250,760 L250,835" marker-end="url(#arrow)"/>
+    <path d="M250,960 L250,1035" marker-end="url(#arrow)"/>
+    <path d="M250,1160 L250,1235" marker-end="url(#arrow)"/>
+    <path d="M250,1360 L250,1435" marker-end="url(#arrow)"/>
+    <path d="M250,1560 L250,1635" marker-end="url(#arrow)"/>
+    <path d="M250,1760 L250,1835" marker-end="url(#arrow)"/>
+    <path d="M250,1960 L250,2020" marker-end="url(#arrow)"/>
+
+    <text class="s l" x="260" y="800">Не</text>
+    <text class="s l" x="260" y="1200">Так</text>
+    <text class="s l" x="260" y="1400">Не</text>
+    <text class="s l" x="260" y="1800">Не</text>
+
+    <!-- !cat -> throw -> злучальнік А -->
+    <path d="M370,700 L450,700 L450,750" marker-end="url(#arrow)"/>
+    <text class="s l" x="378" y="692">Так</text>
+    <text class="t l" x="378" y="716">(throw)</text>
+    <g transform="translate(450,780)"><use href="#conn"/><text y="5">А</text></g>
+
+
+    <!-- пусты радок: continue -->
+    <path d="M370,1300 L520,1300 L520,1100"/>
+    <text class="s l" x="380" y="1292">Так</text>
+
+    <!-- parts.size() < 3 -> catch -->
+    <path d="M370,1700 L750,1700 L750,1765" marker-end="url(#arrow)"/>
+    <text class="s l" x="380" y="1692">Так</text>
+
+    <!-- пераход у калонку 2 праз злучальнік Б -->
+    <g transform="translate(250,2050)"><use href="#conn"/><text y="5">Б</text></g>
+
+    <!-- ===== КАЛОНКА 2 (x=750) ===== -->
+    <g transform="translate(750,100)"><use href="#conn"/><text y="5">Б</text></g>
+    <path d="M750,125 L750,235" marker-end="url(#arrow)"/>
+
+    <g transform="translate(750,300)"><use href="#proc"/>
+        <text class="s" y="-8">выклік ф.</text>
+        <text class="t" y="8">ComponentFactory::create(id)</text>
+    </g>
+    <path d="M750,360 L750,435" marker-end="url(#arrow)"/>
+
+    <g transform="translate(750,500)"><use href="#rect"/>
+        <text class="s" y="-3">Дадаць катэгорыю ў мапу:</text>
+        <text class="s" y="11">categories_[info.id] = info</text>
+    </g>
+    <path d="M750,560 L750,600 L520,600 L520,1100"/>
+
+    <!-- агульны вяртанне ў загаловак цыкла па cat -->
+    <path d="M900,1100 L375,1100" marker-end="url(#arrow)"/>
+
+    <g transform="translate(750,1830)"><use href="#rect"/>
+        <text class="s" y="-14">catch (InventoryException):</text>
+        <text class="s" y="2">++bad; вывесці e.what()</text>
+        <text class="s" y="18">у std::cerr</text>
+    </g>
+    <path d="M750,1890 L750,1940 L900,1940 L900,1100"/>
+
+    <!-- камэнтар да catch: злучэнне справа, левы бок адкрыты -->
+    <path class="d" d="M630,1830 L600,1830"/>
+    <path class="d" d="M400,1780 L600,1780 L600,1880 L400,1880"/>
+    <text class="t" x="500" y="1799">Магчымыя выключэнні ў try:</text>
+    <text class="t" x="500" y="1815">FileException (parts.size() &lt; 3),</text>
+    <text class="t" x="500" y="1831">parse_int, create</text>
+    <text class="t" x="500" y="1847">перахопліваюцца ў catch,</text>
+    <text class="t" x="500" y="1863">цыкл працягваецца</text>
+</g>
+
+    <!-- ===== ЧАСТКА 2: цыкл па катэгорыях і хвост ===== -->
+    <g transform="translate(1370,0)">
+
+    <!-- ===== КАЛОНКА 1 (x=250): цыкл па катэгорыях ===== -->
+
+    <g transform="translate(250,300)"><use href="#rhomb"/>
+        <text class="s" y="-3">Ёсць наступная катэгорыя</text>
+        <text class="s" y="11">у categories_?</text>
+    </g>
+
+    <g transform="translate(250,500)"><use href="#io"/>
+        <text class="s" y="-3">Адкрыць файл катэгорыі:</text>
+        <text class="t" y="11">in = ifstream(path(info.file))</text>
+    </g>
+
+    <g transform="translate(250,700)"><use href="#rhomb"/>
+        <text class="s" y="-3">Файл катэгорыі не</text>
+        <text class="s" y="11">адкрыты (!in)?</text>
+    </g>
+
+    <g transform="translate(250,900)"><use href="#proc"/>
+        <text class="s" y="-8">выклік ф.</text>
+        <text class="s" y="8">Logger::log(...)</text>
+    </g>
+
+    <path d="M250,360 L250,435" marker-end="url(#arrow)"/>
+    <text class="s l" x="260" y="400">Так</text>
+    <path d="M250,560 L250,635" marker-end="url(#arrow)"/>
+    <path d="M250,760 L250,835" marker-end="url(#arrow)"/>
+    <text class="s l" x="260" y="800">Так</text>
+
+    <!-- Не: больш няма катэгорый -> хвост (калонка 3) -->
+    <path d="M370,300 L1250,300 L1250,335" marker-end="url(#arrow)"/>
+    <text class="s l" x="380" y="292">Не</text>
+
+    <!-- Не: файл адкрыты -> цела цыкла (калонка 2) -->
+    <path d="M370,700 L750,700 L750,835" marker-end="url(#arrow)"/>
+    <text class="s l" x="380" y="692">Не</text>
+
+    <!-- log-nf -> наступная катэгорыя (левая шына) -->
+    <path d="M250,960 L250,1000 L80,1000"/>
+    <path d="M630,1100 L80,1100 L80,300 L125,300" marker-end="url(#arrow)"/>
+    <text class="s r" x="620" y="1092">Не</text>
+
+    <!-- камэнтар да log-nf: злучэнне злева, правы бок адкрыты -->
+    <path class="d" d="M370,900 L400,900"/>
+    <path class="d" d="M590,850 L400,850 L400,950 L590,950"/>
+    <text class="t" x="495" y="872">Файл катэгорыі не знойдзены:</text>
+    <text class="t" x="495" y="888">запіс у лог і continue —</text>
+    <text class="t" x="495" y="904">пераход да наступнай</text>
+    <text class="t" x="495" y="920">катэгорыі</text>
+
+    <!-- ===== КАЛОНКА 2 (x=750): цыкл па радках файла ===== -->
+    <g transform="translate(750,900)"><use href="#rect"/>
+        <text class="s" y="-3">Ініцыял. лічыльнік радкоў:</text>
+        <text class="s" y="11">line_no = 0</text>
+    </g>
+
+    <g transform="translate(750,1100)"><use href="#rhomb"/>
+        <text class="s" y="-3">Ёсць радок у in?</text>
+        <text class="s" y="11">getline(in, line)</text>
+    </g>
+
+    <g transform="translate(750,1300)"><use href="#rect"/>
+        <text class="s" y="-3">Павялічыць нумар радка:</text>
+        <text class="s" y="11">++line_no</text>
+    </g>
+
+    <g transform="translate(750,1500)"><use href="#rhomb"/>
+        <text class="s" y="-3">Радок line пусты?</text>
+        <text class="s" y="11">trim(line).empty()</text>
+    </g>
+
+    <g transform="translate(750,1700)"><use href="#proc"/>
+        <text class="s" y="-14">выклік ф.</text>
+        <text class="t" y="2">ComponentFactory::create(id)</text>
+        <text class="s" y="18">→ item</text>
+    </g>
+
+    <g transform="translate(750,1900)"><use href="#proc"/>
+        <text class="s" y="-14">выклік ф.</text>
+        <text class="t" y="2">ss = istringstream(line);</text>
+        <text class="t" y="18">item->deserialize(ss)</text>
+    </g>
+
+    <path d="M750,960 L750,1035" marker-end="url(#arrow)"/>
+    <path d="M750,1160 L750,1235" marker-end="url(#arrow)"/>
+    <text class="s l" x="760" y="1200">Так</text>
+    <path d="M750,1360 L750,1435" marker-end="url(#arrow)"/>
+    <path d="M750,1560 L750,1635" marker-end="url(#arrow)"/>
+    <text class="s l" x="760" y="1600">Не</text>
+    <path d="M750,1760 L750,1835" marker-end="url(#arrow)"/>
+    <path d="M750,1960 L750,2020" marker-end="url(#arrow)"/>
+
+    <!-- пусты радок: continue -->
+    <path d="M870,1500 L990,1500"/>
+    <text class="s l" x="880" y="1492">Так</text>
+
+    <!-- агульная шына вяртання ў загаловак цыкла па радках -->
+    <path d="M990,2050 L990,1100"/>
+    <path d="M990,1100 L875,1100" marker-end="url(#arrow)"/>
+
+    <g transform="translate(750,2050)"><use href="#conn"/><text y="5">В</text></g>
+
+    <!-- камэнтар да try: злучэнне справа, левы бок адкрыты -->
+    <path class="d" d="M630,1900 L600,1900"/>
+    <path class="d" d="M400,1850 L600,1850 L600,1950 L400,1950"/>
+    <text class="t" x="500" y="1868">Магчымыя выключэнні ў try:</text>
+    <text class="t" x="500" y="1884">create, deserialize, лішнія</text>
+    <text class="t" x="500" y="1900">токены (FileException), дубль</text>
+    <text class="t" x="500" y="1916">SKU (ValidationException) —</text>
+    <text class="t" x="500" y="1932">перахопліваюцца ў catch</text>
+
+    <!-- ===== КАЛОНКА 3 (x=1250): хвост алгарытму ===== -->
+    <g transform="translate(1250,400)"><use href="#proc"/>
+        <text class="s" y="-8">выклік ф.</text>
+        <text class="s" y="8">rebuild_tree()</text>
+    </g>
+
+    <g transform="translate(1250,600)"><use href="#rect"/>
+        <text class="s" y="-3">Прысвоіць значэнне</text>
+        <text class="s" y="11">modified_ = false</text>
+    </g>
+
+    <g transform="translate(1250,800)"><use href="#proc"/>
+        <text class="s" y="-14">выклік ф.</text>
+        <text class="s" y="2">Logger::log(...)</text>
+        <text class="s" y="18">(каталог загружаны)</text>
+    </g>
+
+    <g transform="translate(1250,1000)"><use href="#term"/><text y="5">Канец</text></g>
+
+    <path d="M1250,460 L1250,535" marker-end="url(#arrow)"/>
+    <path d="M1250,660 L1250,735" marker-end="url(#arrow)"/>
+    <path d="M1250,860 L1250,965" marker-end="url(#arrow)"/>
+    <text class="t l" x="1262" y="905">вярнуць bad</text>
+
+    <!-- злучальнік А: throw з ліста 1 -->
+    <g transform="translate(1000,880)"><use href="#conn"/><text y="5">А</text></g>
+    <path d="M1000,905 L1000,925 L1250,925"/>
+
+    <!-- ===== КАЛОНКА 3 (x=1250), ніжняя частка: праверкі і дадаванне ===== -->
+    <g transform="translate(1250,1160)"><use href="#conn"/><text y="5">В</text></g>
+    <path d="M1250,1185 L1250,1275" marker-end="url(#arrow)"/>
+
+    <g transform="translate(1250,1340)"><use href="#rhomb"/>
+        <text class="s" y="-3">Лішнія токены ў радку?</text>
+        <text class="s" y="11">ss.peek() != EOF</text>
+    </g>
+
+    <g transform="translate(1250,1540)"><use href="#rhomb"/>
+        <text class="s" y="-3">Дубль SKU?</text>
+        <text class="t" y="11">has_article(item->article())</text>
+    </g>
+
+    <g transform="translate(1250,1740)"><use href="#rect"/>
+        <text class="s" y="-10">Дадаць у BST і ў спіс:</text>
+        <text class="s" y="4">sku_tree_.add(SkuRecord{...});</text>
+        <text class="s" y="18">items_.push_back(move(item))</text>
+    </g>
+
+    <g transform="translate(1250,1950)"><use href="#rect"/>
+        <text class="s" y="-14">catch (InventoryException):</text>
+        <text class="s" y="2">++bad; вывесці file:line_no:</text>
+        <text class="s" y="18">e.what() у std::cerr</text>
+    </g>
+
+    <path d="M1250,1400 L1250,1475" marker-end="url(#arrow)"/>
+    <text class="s l" x="1260" y="1440">Не</text>
+    <path d="M1250,1600 L1250,1675" marker-end="url(#arrow)"/>
+    <text class="s l" x="1260" y="1640">Не</text>
+
+    <!-- Так (throw) -> catch -->
+    <path d="M1370,1340 L1430,1340 L1430,1850 L1250,1850 L1250,1885" marker-end="url(#arrow)"/>
+    <text class="s l" x="1378" y="1332">Так</text>
+    <path d="M1370,1540 L1430,1540"/>
+    <text class="s l" x="1378" y="1532">Так</text>
+
+    <!-- add і catch -> шына вяртання -->
+    <path d="M1250,1800 L1250,1815 L990,1815"/>
+    <path d="M1250,2010 L1250,2050 L990,2050"/>
+</g>
+
+    <!-- Не: радкоў у cat няма -> пераход да цыкла па катэгорыях (ліст 1 -> ліст 2, без злучальніка) -->
+    <path d="M250,1100 L200,1100 L200,40 L1620,40 L1620,235" marker-end="url(#arrow)"/>
+    <text class="s" x="225" y="1092">Не</text>
+</svg>

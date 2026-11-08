@@ -1,0 +1,53 @@
+@startuml
+skinparam classAttributeIconSize 0
+abstract class Component {
+  #id_: int
+  #article_: string
+  #name_: string
+  #manufacturer_: string
+  #price_: double
+  #quantity_: int
+  +category_id(): int {abstract}
+  +field_names(): vector<string>
+  +set_field(no, value)
+  +serialize(ostream)
+  +deserialize(istream)
+  +print_header(ostream)
+  +print_row(ostream)
+  +clone(): unique_ptr<Component> {abstract}
+}
+abstract class PeripheralDevice { #connection_: string }
+abstract class InternalHardware { #tdp_: int }
+class Mouse { -dpi_: int }
+class Keyboard { -switch_type_: string }
+class Monitor { -refresh_rate_: int }
+class Processor { -clock_mhz_: int }
+class RAM { -capacity_gb_: int }
+Component <|-- PeripheralDevice
+Component <|-- InternalHardware
+PeripheralDevice <|-- Mouse
+PeripheralDevice <|-- Keyboard
+PeripheralDevice <|-- Monitor
+InternalHardware <|-- Processor
+InternalHardware <|-- RAM
+
+class "VectorContainer<T>" as VC
+class ComponentFactory { +create(category_id): unique_ptr<Component> }
+class InventoryManager {
+  -items_: VectorContainer<unique_ptr<Component>>
+  -history_: stack<unique_ptr<Command>>
+  +load_all() +save_all()
+  +add() +remove() +edit() +undo()
+  +search_*() +sorted() +write_report()
+}
+abstract class Command { +execute() +undo() +description() }
+Command <|-- AddCommand
+Command <|-- RemoveCommand
+Command <|-- EditCommand
+InventoryManager o-- VC
+InventoryManager o-- Command
+InventoryManager ..> ComponentFactory
+ComponentFactory ..> Component
+class Logger { +log(action) }
+InventoryManager ..> Logger
+@enduml

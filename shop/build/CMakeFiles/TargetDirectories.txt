@@ -1,0 +1,3 @@
+/home/chibixar/Documents/Arkadz/BSUIR/2/PNAYAVU/KURSACH/shop/build/CMakeFiles/shop.dir
+/home/chibixar/Documents/Arkadz/BSUIR/2/PNAYAVU/KURSACH/shop/build/CMakeFiles/edit_cache.dir
+/home/chibixar/Documents/Arkadz/BSUIR/2/PNAYAVU/KURSACH/shop/build/CMakeFiles/rebuild_cache.dir

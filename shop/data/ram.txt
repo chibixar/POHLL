@@ -1,0 +1,2 @@
+501;RAM-1;Vengeance LPX 16GB DDR4;Corsair;120.00;25;5;16
+502;RAM-2;Fury Beast 32GB DDR5;Kingston;260.00;12;6;32

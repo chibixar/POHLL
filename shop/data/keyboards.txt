@@ -1,0 +1,3 @@
+201;K-012;Apex Pro TKL;SteelSeries;600.00;8;USB;Mechanical
+202;K-013;Alloy Origins;HyperX;310.00;14;USB;Mechanical
+203;K-014;K120;Logitech;45.00;50;USB;Membrane

@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 2121" width="210mm" height="297mm">
+    <style>
+        rect, polygon, path, line, circle, polyline { fill: none; stroke: black; stroke-width: 1.5; }
+        text { font-family: Arial, sans-serif; font-size: 14px; fill: black; stroke: none; text-anchor: middle; }
+        .s { font-size: 11px; }
+        .t { font-size: 10px; }
+        .l { text-anchor: start; }
+        .r { text-anchor: end; }
+        .d { stroke-dasharray: 2,4; }
+        .bg { fill: white; stroke: none; }
+    </style>
+    <rect class="bg" x="0" y="0" width="1500" height="2121"/>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M 0,0 L 10,5 L 0,10 Z" style="fill: black; stroke: none;" />
+        </marker>
+        <rect id="term" x="-120" y="-30" width="240" height="60" rx="30" ry="30" />
+        <rect id="rect" x="-120" y="-60" width="240" height="120" />
+        <g id="proc">
+            <rect x="-120" y="-60" width="240" height="120" />
+            <line x1="-90" x2="-90" y1="-60" y2="60" />
+            <line x1="90" x2="90" y1="-60" y2="60" />
+        </g>
+        <polygon id="rhomb" points="0,-60 120,0 0,60 -120,0" />
+        <polygon id="io" points="-90,-60 120,-60 90,60 -120,60" />
+        <circle id="conn" cx="0" cy="0" r="25" />
+    </defs>
+
+    <!-- ===== ГАЛОЎНАЯ КАЛОНКА (x=750) ===== -->
+    <g transform="translate(750,60)"><use href="#term"/><text y="5">Пачатак</text></g>
+
+    <g transform="translate(750,210)"><use href="#rect"/>
+        <text class="t" y="-22">Ув: node, value, removed;</text>
+        <text class="t" y="-6">Лак.: leftChild, rightChild, successor;</text>
+        <text class="t" y="10">Вых: Node* — корань падрэва</text>
+        <text class="t" y="26">пасля магчымага выдалення</text>
+    </g>
+
+    <g transform="translate(750,390)"><use href="#rhomb"/>
+        <text class="s" y="-3">Вузел пусты</text>
+        <text class="s" y="11">(node == nullptr)?</text>
+    </g>
+
+    <g transform="translate(750,570)"><use href="#rhomb"/>
+        <text class="s" y="-3">Значэнне меншае</text>
+        <text class="s" y="11">(value &lt; node->data)?</text>
+    </g>
+
+    <g transform="translate(750,750)"><use href="#rhomb"/>
+        <text class="s" y="-3">Значэнне большае</text>
+        <text class="s" y="11">(node->data &lt; value)?</text>
+    </g>
+
+    <g transform="translate(750,930)"><use href="#rect"/>
+        <text class="s" y="-3">Элемент знойдзены:</text>
+        <text class="s" y="11">removed = true</text>
+    </g>
+
+    <g transform="translate(750,1110)"><use href="#rhomb"/>
+        <text class="s" y="-3">Няма левага нашчадка</text>
+        <text class="s" y="11">(!node->left)?</text>
+    </g>
+
+    <g transform="translate(750,1290)"><use href="#rhomb"/>
+        <text class="s" y="-3">Няма правага нашчадка</text>
+        <text class="s" y="11">(!node->right)?</text>
+    </g>
+
+    <g transform="translate(750,1470)"><use href="#proc"/>
+        <text class="s" y="-10">выклік ф.</text>
+        <text class="t" y="4">successor =</text>
+        <text class="t" y="18">findMin(node->right)</text>
+    </g>
+
+    <g transform="translate(750,1650)"><use href="#rect"/>
+        <text class="s" y="-3">Скапіяваць даныя пераемніка:</text>
+        <text class="s" y="11">node->data = successor->data</text>
+    </g>
+
+    <g transform="translate(750,1830)"><use href="#proc"/>
+        <text class="t" y="-24">выклік ф. (рэкурсія)</text>
+        <text class="t" y="-10">node->right = removeNode(</text>
+        <text class="t" y="4">node->right, successor->data,</text>
+        <text class="t" y="18">removed)</text>
+    </g>
+
+    <g transform="translate(750,2020)"><use href="#term"/><text y="5">Канец</text></g>
+
+    <!-- стрэлкі галоўнай калонкі -->
+    <path d="M750,90 L750,145" marker-end="url(#arrow)"/>
+    <path d="M750,270 L750,325" marker-end="url(#arrow)"/>
+    <path d="M750,450 L750,505" marker-end="url(#arrow)"/>
+    <path d="M750,630 L750,685" marker-end="url(#arrow)"/>
+    <path d="M750,810 L750,865" marker-end="url(#arrow)"/>
+    <path d="M750,990 L750,1045" marker-end="url(#arrow)"/>
+    <path d="M750,1170 L750,1225" marker-end="url(#arrow)"/>
+    <path d="M750,1350 L750,1405" marker-end="url(#arrow)"/>
+    <path d="M750,1530 L750,1585" marker-end="url(#arrow)"/>
+    <path d="M750,1710 L750,1765" marker-end="url(#arrow)"/>
+    <path d="M750,1890 L750,1985" marker-end="url(#arrow)"/>
+    <text class="t l" x="762" y="1915">вярнуць node</text>
+
+    <text class="s l" x="760" y="480">Не</text>
+    <text class="s l" x="760" y="660">Не</text>
+    <text class="s l" x="760" y="840">Не</text>
+    <text class="s l" x="760" y="1200">Не</text>
+    <text class="s l" x="760" y="1380">Не</text>
+
+    <!-- ===== ЛЕВАЯ КАЛОНКА (x=250) ===== -->
+    <path d="M630,570 L250,570 L250,625" marker-end="url(#arrow)"/>
+    <text class="s r" x="620" y="562">Так</text>
+    <g transform="translate(250,690)"><use href="#proc"/>
+        <text class="t" y="-10">выклік ф. (рэкурсія)</text>
+        <text class="t" y="4">node->left = removeNode(</text>
+        <text class="t" y="18">node->left, value, removed)</text>
+    </g>
+    <path d="M250,750 L250,790 L70,790"/>
+    <text class="t" x="160" y="782">вярнуць node</text>
+
+    <path d="M630,1290 L250,1290 L250,1345" marker-end="url(#arrow)"/>
+    <text class="s r" x="620" y="1282">Так</text>
+    <g transform="translate(250,1410)"><use href="#rect"/>
+        <text class="s" y="-3">Захаваць левага нашчадка:</text>
+        <text class="s" y="11">leftChild = node->left</text>
+    </g>
+    <path d="M250,1470 L250,1525" marker-end="url(#arrow)"/>
+    <g transform="translate(250,1590)"><use href="#proc"/>
+        <text class="s" y="-3">выклік ф.</text>
+        <text class="s" y="11">delete node</text>
+    </g>
+    <path d="M250,1650 L250,1690 L70,1690"/>
+    <text class="t" x="160" y="1682">вярнуць leftChild</text>
+
+    <!-- левая шына вяртання ў Канец -->
+    <path d="M70,790 L70,1940 L750,1940"/>
+
+    <!-- ===== ПРАВАЯ КАЛОНКА (x=1250) ===== -->
+    <path d="M870,390 L1250,390 L1250,445" marker-end="url(#arrow)"/>
+    <text class="s l" x="880" y="382">Так</text>
+    <g transform="translate(1250,510)"><use href="#rect"/>
+        <text class="s" y="-3">Прысвоіць знач.</text>
+        <text class="s" y="11">removed = false</text>
+    </g>
+    <path d="M1250,570 L1250,610 L1440,610"/>
+    <text class="t" x="1345" y="602">вярнуць nullptr</text>
+
+    <path d="M870,750 L1250,750 L1250,805" marker-end="url(#arrow)"/>
+    <text class="s l" x="880" y="742">Так</text>
+    <g transform="translate(1250,870)"><use href="#proc"/>
+        <text class="t" y="-10">выклік ф. (рэкурсія)</text>
+        <text class="t" y="4">node->right = removeNode(</text>
+        <text class="t" y="18">node->right, value, removed)</text>
+    </g>
+    <path d="M1250,930 L1250,970 L1440,970"/>
+    <text class="t" x="1345" y="962">вярнуць node</text>
+
+    <path d="M870,1110 L1250,1110 L1250,1165" marker-end="url(#arrow)"/>
+    <text class="s l" x="880" y="1102">Так</text>
+    <g transform="translate(1250,1230)"><use href="#rect"/>
+        <text class="s" y="-3">Захаваць правага нашчадка:</text>
+        <text class="s" y="11">rightChild = node->right</text>
+    </g>
+    <path d="M1250,1290 L1250,1345" marker-end="url(#arrow)"/>
+    <g transform="translate(1250,1410)"><use href="#proc"/>
+        <text class="s" y="-3">выклік ф.</text>
+        <text class="s" y="11">delete node</text>
+    </g>
+    <path d="M1250,1470 L1250,1510 L1440,1510"/>
+    <text class="t" x="1345" y="1502">вярнуць rightChild</text>
+
+    <!-- правая шына вяртання ў Канец -->
+    <path d="M1440,610 L1440,1940 L750,1940"/>
+
+    <!-- камэнтар да findMin: злучэнне злева, правы бок адкрыты -->
+    <path class="d" d="M870,1470 L910,1470"/>
+    <path class="d" d="M1090,1420 L910,1420 L910,1520 L1090,1520"/>
+    <text class="t" x="1000" y="1446">findMin(node): ідзе ўлева,</text>
+    <text class="t" x="1000" y="1462">пакуль існуе node->left;</text>
+    <text class="t" x="1000" y="1478">вяртае найменшы вузел</text>
+    <text class="t" x="1000" y="1494">правага падрэва</text>
+</svg>

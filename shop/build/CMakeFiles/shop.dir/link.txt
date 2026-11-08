@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/shop.dir/link.d CMakeFiles/shop.dir/src/Component.cpp.o CMakeFiles/shop.dir/src/ComponentFactory.cpp.o CMakeFiles/shop.dir/src/Internals.cpp.o CMakeFiles/shop.dir/src/InventoryManager.cpp.o CMakeFiles/shop.dir/src/Logger.cpp.o CMakeFiles/shop.dir/src/Peripherals.cpp.o CMakeFiles/shop.dir/src/main.cpp.o -o shop

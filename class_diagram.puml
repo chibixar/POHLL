@@ -1,0 +1,364 @@
+@startuml class_diagram
+' ============================================================
+' Дыяграма класаў у стылі ГОСТ (чорна-белая, Times New Roman)
+' Экспарт: plantuml -tpng -DPLANTUML_LIMIT_SIZE=16384 class_diagram.puml
+'          (для вектара: -tsvg або -tpdf)
+' ============================================================
+
+' ---------- Стыль ГОСТ ----------
+skinparam monochrome true
+skinparam shadowing false
+skinparam roundCorner 0
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classBorderThickness 1
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam NoteBackgroundColor white
+skinparam NoteBorderColor black
+skinparam backgroundColor white
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 80
+skinparam dpi 200
+skinparam padding 2
+hide circle
+hide empty members
+
+' ---------- Выключэнні ----------
+class "std::runtime_error" as RTE <<std>>
+class InventoryException <<struct>>
+class ValidationException <<struct>>
+class FileException <<struct>>
+class NotFoundException <<struct>>
+
+RTE <|-- InventoryException
+InventoryException <|-- ValidationException
+InventoryException <|-- FileException
+InventoryException <|-- NotFoundException
+
+' ---------- Іерархія тавараў ----------
+enum Department {
+  Peripheral
+  Internal
+}
+
+abstract class Component {
+  # id_: int
+  # article_: std::string
+  # name_: std::string
+  # manufacturer_: std::string
+  # price_: double
+  # quantity_: int
+  --
+  + id(): int
+  + article(): const std::string&
+  + price(): double
+  + quantity(): int
+  + total(): double
+  + set_id(value: int)
+  + set_article(value: const std::string&)
+  + set_name(value: const std::string&)
+  + set_manufacturer(value: const std::string&)
+  + set_price(value: double)
+  + set_quantity(value: int)
+  + {abstract} category_id(): int
+  + {abstract} category_name(): std::string
+  + {abstract} department(): Department
+  + {abstract} clone(): std::unique_ptr<Component>
+  + field_names(): std::vector<std::string>
+  + set_field(field_no: int, value: const std::string&)
+  + serialize(os: std::ostream&)
+  + deserialize(is: std::istream&)
+  + print_header(os: std::ostream&)
+  + print_row(os: std::ostream&)
+}
+
+abstract class PeripheralDevice {
+  # connection_: std::string
+  --
+  + connection(): const std::string&
+  + set_connection(value: const std::string&)
+  + department(): Department
+}
+
+abstract class InternalHardware {
+  # tdp_: int
+  --
+  + tdp(): int
+  + set_tdp(value: int)
+  + department(): Department
+}
+
+class Mouse {
+  - dpi_: int
+  --
+  + dpi(): int
+  + set_dpi(value: int)
+}
+
+class Keyboard {
+  - switch_type_: std::string
+  --
+  + switch_type(): const std::string&
+  + set_switch_type(value: const std::string&)
+}
+
+class Monitor {
+  - refresh_rate_: int
+  --
+  + refresh_rate(): int
+  + set_refresh_rate(value: int)
+}
+
+class Processor {
+  - clock_mhz_: int
+  --
+  + clock_mhz(): int
+  + set_clock_mhz(value: int)
+}
+
+class RAM {
+  - capacity_gb_: int
+  --
+  + capacity_gb(): int
+  + set_capacity_gb(value: int)
+}
+
+Component <|-- PeripheralDevice
+Component <|-- InternalHardware
+PeripheralDevice <|-- Mouse
+PeripheralDevice <|-- Keyboard
+PeripheralDevice <|-- Monitor
+InternalHardware <|-- Processor
+InternalHardware <|-- RAM
+Component ..> Department
+Component ..> ValidationException : <<throws>>
+Component ..> FileException : <<throws>>
+
+class ComponentFactory {
+  + {static} create(category_id: int): std::unique_ptr<Component>
+}
+ComponentFactory ..> Component : <<create>>
+ComponentFactory ..> NotFoundException : <<throws>>
+
+' ---------- Уласны кантэйнер і ітэратар ----------
+class "VectorContainer<T>" as VectorContainer {
+  - data_: T*
+  - size_: size_t
+  - cap_: size_t
+  --
+  - reserve(new_cap: size_t)
+  + push_back(value: T)
+  + insert(index: size_t, value: T)
+  + erase(index: size_t): T
+  + operator[](i: size_t): T&
+  + size(): size_t
+  + empty(): bool
+  + data(): T*
+  + begin(): Iterator
+  + end(): Iterator
+}
+
+class "VectorContainer::BasicIterator<U>" as BasicIterator {
+  - p_: U*
+  --
+  + operator*(): U&
+  + operator->(): U*
+  + operator++(): BasicIterator&
+  + operator==(o: const BasicIterator&): bool
+  + operator!=(o: const BasicIterator&): bool
+}
+
+VectorContainer *-- BasicIterator : <<nested>>
+VectorContainer o-- "0..*" Component : <<unique_ptr>>
+
+class Algorithms <<utility>> {
+  + find_if_own(first: It, last: It, pred: Pred): It
+  + count_if_own(first: It, last: It, pred: Pred): size_t
+  + sort_own(first: It, last: It, less: Less)
+}
+
+' ---------- Бінарнае дрэва пошуку ----------
+class "BinaryTree<T>" as BinaryTree {
+  - root: Node*
+  - count: int
+  --
+  - insertNode(node: Node*, value: const T&, added: bool&): Node*
+  - removeNode(node: Node*, value: const T&, removed: bool&): Node*
+  - findNode(node: const Node*, value: const T&): const Node*
+  - printSideways(node: const Node*, level: int, os: std::ostream&)
+  + add(value: const T&): bool
+  + remove(value: const T&): bool
+  + find(value: const T&): const T*
+  + print(os: std::ostream&)
+  + printList(os: std::ostream&)
+  + clear()
+  + size(): int
+  + isEmpty(): bool
+}
+
+class "BinaryTree::Node" as TreeNode <<struct>> {
+  + data: T
+  + left: Node*
+  + right: Node*
+}
+
+class SkuRecord <<struct>> {
+  + article: std::string
+  + component: const Component*
+  --
+  + operator<(o: const SkuRecord&): bool
+  + operator==(o: const SkuRecord&): bool
+}
+
+BinaryTree *-- "0..*" TreeNode : <<nested>>
+TreeNode --> "0..2" TreeNode : left, right
+BinaryTree ..> SkuRecord : <<bind T>>
+SkuRecord --> "1" Component
+
+' ---------- Каманды адмены ----------
+abstract class Command {
+  + {abstract} execute()
+  + {abstract} undo()
+  + {abstract} description(): std::string
+}
+
+class AddCommand {
+  - items_: Items&
+  - item_: std::unique_ptr<Component>
+  - article_: std::string
+  --
+  + execute()
+  + undo()
+  + description(): std::string
+}
+
+class RemoveCommand {
+  - items_: Items&
+  - index_: size_t
+  - article_: std::string
+  - removed_: std::unique_ptr<Component>
+  --
+  + execute()
+  + undo()
+  + description(): std::string
+}
+
+class EditCommand {
+  - items_: Items&
+  - index_: size_t
+  - field_: int
+  - value_: std::string
+  - article_: std::string
+  - old_: std::unique_ptr<Component>
+  --
+  + execute()
+  + undo()
+  + description(): std::string
+}
+
+Command <|-- AddCommand
+Command <|-- RemoveCommand
+Command <|-- EditCommand
+AddCommand ..> VectorContainer
+RemoveCommand ..> VectorContainer
+EditCommand ..> VectorContainer
+AddCommand o-- "0..1" Component
+RemoveCommand o-- "0..1" Component
+EditCommand o-- "0..1" Component : backup
+
+' ---------- Бізнес-логіка ----------
+enum SortKey {
+  Price = 1
+  Name = 2
+  Quantity = 3
+  TotalValue = 4
+}
+
+class CategoryInfo <<struct>> {
+  + id: int
+  + name: std::string
+  + file: std::string
+}
+
+class InventoryManager {
+  - dir_: std::string
+  - items_: Items
+  - categories_: std::map<int, CategoryInfo>
+  - history_: std::stack<std::unique_ptr<Command>>
+  - modified_: bool
+  - sku_tree_: BinaryTree<SkuRecord>
+  --
+  - path(file: const std::string&): std::string
+  - has_article(article: const std::string&): bool
+  - index_of(article: const std::string&): size_t
+  - push_done(cmd: std::unique_ptr<Command>)
+  - rebuild_tree()
+  + load_all(): size_t
+  + save_all()
+  + next_id(category_id: int): int
+  + add(item: std::unique_ptr<Component>)
+  + remove(article: const std::string&)
+  + edit(article: const std::string&, field_no: int, value: const std::string&)
+  + undo()
+  + find_by_article(article: const std::string&): const Component&
+  + find_by_article_bst(article: const std::string&): const Component*
+  + display_sku_tree(os: std::ostream&)
+  + all(): std::vector<const Component*>
+  + filter_by_category(category_id: int): std::vector<const Component*>
+  + filter_by_department(dept: Department): std::vector<const Component*>
+  + filter_low_stock(threshold: int): std::vector<const Component*>
+  + search_by_manufacturer(text: const std::string&): std::vector<const Component*>
+  + search_by_name(text: const std::string&): std::vector<const Component*>
+  + search_by_price(lo: double, hi: double): std::vector<const Component*>
+  + sorted(key: SortKey, own_algorithm: bool): std::vector<const Component*>
+  + write_report(file: const std::string&)
+  + modified(): bool
+}
+
+class Logger {
+  + {static} set_file(path: const std::string&)
+  + {static} set_role(role: const std::string&)
+  + {static} log(action: const std::string&)
+}
+
+InventoryManager *-- "1" VectorContainer : items_
+InventoryManager *-- "0..*" CategoryInfo : categories_
+InventoryManager o-- "0..*" Command : history_
+InventoryManager *-- "1" BinaryTree : sku_tree_
+InventoryManager ..> ComponentFactory
+InventoryManager ..> Algorithms
+InventoryManager ..> SortKey
+InventoryManager ..> Department
+InventoryManager ..> Logger
+InventoryManager ..> InventoryException : <<throws>>
+
+' ---------- Інтэрфейс (main.cpp) ----------
+class "main.cpp" as Main <<module>> {
+  - read_line(prompt: const std::string&): std::string
+  - read_int(prompt: const std::string&, lo: int, hi: int): int
+  - add_item(mgr: InventoryManager&)
+  - edit_item(mgr: InventoryManager&)
+  - search(mgr: const InventoryManager&)
+  - sort_menu(mgr: const InventoryManager&)
+  - show_filter_menu(mgr: const InventoryManager&)
+  + main(argc: int, argv: char**): int
+}
+
+enum Role {
+  Admin = 1
+  User = 2
+}
+
+Main ..> InventoryManager
+Main ..> ComponentFactory
+Main ..> Logger
+Main ..> Role
+Main ..> InventoryException : <<catch>>
+
+@enduml

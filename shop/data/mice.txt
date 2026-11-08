@@ -1,0 +1,3 @@
+101;M-001;G Pro Wireless;Logitech;350.50;15;Wireless;25600
+102;M-002;DeathAdder V2;Razer;180.00;22;USB;20000
+103;M-003;Viper Mini;Razer;110.00;30;USB;8500

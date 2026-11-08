@@ -1,0 +1,292 @@
+{
+  "version": 2,
+  "output": "diagram.typ",
+  "autoExport": true,
+  "style": {
+    "styleVersion": 2,
+    "name": "GOST",
+    "font": [
+      "Times New Roman",
+      "Liberation Serif",
+      "serif"
+    ],
+    "fontSize": 13.0,
+    "nameFontSize": 14.0,
+    "stereotypeFontSize": 11.0,
+    "lineHeight": 18.0,
+    "paddingX": 8.0,
+    "paddingY": 4.0,
+    "borderWidth": 1.0,
+    "cornerRadius": 0.0,
+    "nameBold": true,
+    "kindBadge": false,
+    "colors": {
+      "text": "#000000",
+      "border": "#000000",
+      "fill": "#ffffff",
+      "headerFill": "#ffffff",
+      "edge": "#000000",
+      "badge": "#add1b2"
+    },
+    "orthogonalEdges": true,
+    "edgeMergeTargets": true,
+    "edgeEditable": false,
+    "edgeClearance": 12.0,
+    "edgePortSpacing": 20.0,
+    "edgeBendPenalty": 24.0,
+    "edgeSourceSide": "top",
+    "edgeTargetSide": "bottom",
+    "edgeWidth": 1.0,
+    "arrowSize": 12.0,
+    "edgeDashLength": 6.0,
+    "edgeDashGap": 4.0,
+    "interfaceHidesAttributes": true,
+    "showStereotype": true,
+    "templateNotation": "corner",
+    "memberIconStyle": "text",
+    "showMethodParams": true,
+    "showMethodReturnType": true
+  },
+  "positions": {
+    "classAddCommand": {
+      "x": 0.0,
+      "y": 1356.0
+    },
+    "classBinaryTree": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "classCommand": {
+      "x": 950.4,
+      "y": 0.0
+    },
+    "classComponent": {
+      "x": 1315.2,
+      "y": 0.0
+    },
+    "classComponentFactory": {
+      "x": 1795.2,
+      "y": 0.0
+    },
+    "classEditCommand": {
+      "x": 480.0,
+      "y": 1356.0
+    },
+    "classInternalHardware": {
+      "x": 1166.4,
+      "y": 1356.0
+    },
+    "classInventoryManager": {
+      "x": 2517.6,
+      "y": 0.0
+    },
+    "classKeyboard": {
+      "x": 0.0,
+      "y": 1692.0
+    },
+    "classLogger": {
+      "x": 0.0,
+      "y": 786.0
+    },
+    "classMonitor": {
+      "x": 480.0,
+      "y": 1692.0
+    },
+    "classMouse": {
+      "x": 960.0,
+      "y": 1692.0
+    },
+    "classPeripheralDevice": {
+      "x": 1881.6,
+      "y": 1356.0
+    },
+    "classProcessor": {
+      "x": 1440.0,
+      "y": 1692.0
+    },
+    "classRAM": {
+      "x": 1920.0,
+      "y": 1692.0
+    },
+    "classRemoveCommand": {
+      "x": 2361.6000000000004,
+      "y": 1356.0
+    },
+    "classVectorContainer": {
+      "x": 816.0,
+      "y": 786.0
+    },
+    "classVectorContainer_1_1BasicIterator": {
+      "x": 1267.2919751100032,
+      "y": 804.8263485394694
+    },
+    "structBinaryTree_1_1Node": {
+      "x": 480.0,
+      "y": 0.0
+    },
+    "structCategoryInfo": {
+      "x": 729.6,
+      "y": 0.0
+    },
+    "structFileException": {
+      "x": 960.0,
+      "y": 1356.0
+    },
+    "structInventoryException": {
+      "x": 2275.2,
+      "y": 0.0
+    },
+    "structNotFoundException": {
+      "x": 1646.4,
+      "y": 1356.0
+    },
+    "structSkuRecord": {
+      "x": 451.2,
+      "y": 786.0
+    },
+    "structValidationException": {
+      "x": 2769.6000000000004,
+      "y": 1356.0
+    },
+    "structanonymous__namespace_02main_8cpp_03_1_1EndOfInput": {
+      "x": 1675.1999999999998,
+      "y": 786.0
+    }
+  },
+  "collapsed": {
+    "classAddCommand": {
+      "attributes": false,
+      "methods": false
+    },
+    "classBinaryTree": {
+      "attributes": false,
+      "methods": false
+    },
+    "classCommand": {
+      "attributes": false,
+      "methods": false
+    },
+    "classComponent": {
+      "attributes": false,
+      "methods": false
+    },
+    "classComponentFactory": {
+      "attributes": false,
+      "methods": false
+    },
+    "classEditCommand": {
+      "attributes": false,
+      "methods": false
+    },
+    "classInternalHardware": {
+      "attributes": false,
+      "methods": false
+    },
+    "classInventoryManager": {
+      "attributes": false,
+      "methods": false
+    },
+    "classKeyboard": {
+      "attributes": false,
+      "methods": false
+    },
+    "classLogger": {
+      "attributes": false,
+      "methods": false
+    },
+    "classMonitor": {
+      "attributes": false,
+      "methods": false
+    },
+    "classMouse": {
+      "attributes": false,
+      "methods": false
+    },
+    "classPeripheralDevice": {
+      "attributes": false,
+      "methods": false
+    },
+    "classProcessor": {
+      "attributes": false,
+      "methods": false
+    },
+    "classRAM": {
+      "attributes": false,
+      "methods": false
+    },
+    "classRemoveCommand": {
+      "attributes": false,
+      "methods": false
+    },
+    "classVectorContainer": {
+      "attributes": false,
+      "methods": false
+    },
+    "classVectorContainer_1_1BasicIterator": {
+      "attributes": false,
+      "methods": false
+    },
+    "structBinaryTree_1_1Node": {
+      "attributes": false,
+      "methods": false
+    },
+    "structCategoryInfo": {
+      "attributes": false,
+      "methods": false
+    },
+    "structFileException": {
+      "attributes": false,
+      "methods": false
+    },
+    "structInventoryException": {
+      "attributes": false,
+      "methods": false
+    },
+    "structNotFoundException": {
+      "attributes": false,
+      "methods": false
+    },
+    "structSkuRecord": {
+      "attributes": false,
+      "methods": false
+    },
+    "structValidationException": {
+      "attributes": false,
+      "methods": false
+    },
+    "structanonymous__namespace_02main_8cpp_03_1_1EndOfInput": {
+      "attributes": false,
+      "methods": false
+    }
+  },
+  "hidden": {
+    "classAddCommand": false,
+    "classBinaryTree": false,
+    "classCommand": false,
+    "classComponent": false,
+    "classComponentFactory": false,
+    "classEditCommand": false,
+    "classInternalHardware": false,
+    "classInventoryManager": false,
+    "classKeyboard": false,
+    "classLogger": false,
+    "classMonitor": false,
+    "classMouse": false,
+    "classPeripheralDevice": false,
+    "classProcessor": false,
+    "classRAM": false,
+    "classRemoveCommand": false,
+    "classVectorContainer": false,
+    "classVectorContainer_1_1BasicIterator": false,
+    "structBinaryTree_1_1Node": false,
+    "structCategoryInfo": false,
+    "structFileException": false,
+    "structInventoryException": false,
+    "structNotFoundException": false,
+    "structSkuRecord": false,
+    "structValidationException": false,
+    "structanonymous__namespace_02main_8cpp_03_1_1EndOfInput": false
+  },
+  "connections": [],
+  "notes": []
+}
