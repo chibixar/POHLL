@@ -1,0 +1,118 @@
+@startuml 05_inventory_manager
+' File: 05_inventory_manager.puml
+' Module 5: Management, persistence and user workflow
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam roundCorner 0
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classBorderThickness 1
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam backgroundColor white
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam dpi 300
+hide circle
+hide empty members
+
+class "VectorContainer<T>" as VectorContainer
+class "BinaryTree<T>" as BinaryTree
+abstract class Command
+abstract class Component
+class ComponentFactory <<factory>>
+class Algorithms <<utility>>
+enum Department <<enumeration>>
+
+enum SortKey <<enumeration>> {
+  Price = 1
+  Name = 2
+  Quantity = 3
+  TotalValue = 4
+}
+
+enum Role <<enumeration>> {
+  Admin = 1
+  User = 2
+}
+
+class CategoryInfo <<struct>> {
+  + id: int
+  + name: std::string
+  + file: std::string
+}
+
+class Logger {
+  + {static} set_file(path: const std::string&): void
+  + {static} set_role(role: const std::string&): void
+  + {static} log(action: const std::string&): void
+}
+
+class InventoryManager {
+  - dir_: std::string
+  - items_: VectorContainer<std::unique_ptr<Component> >
+  - categories_: std::map<int, CategoryInfo>
+  - history_: std::stack<std::unique_ptr<Command> >
+  - modified_: bool
+  - sku_tree_: BinaryTree<SkuRecord>
+  --
+  - path(file: const std::string&): std::string
+  - has_article(article: const std::string&): bool
+  - index_of(article: const std::string&): size_t
+  - push_done(cmd: std::unique_ptr<Command>): void
+  - rebuild_tree(): void
+  + InventoryManager(data_dir: std::string)
+  + load_all(): size_t
+  + save_all(): void
+  + next_id(category_id: int): int
+  + add(item: std::unique_ptr<Component>): void
+  + remove(article: const std::string&): void
+  + edit(article: const std::string&, field_no: int, value: const std::string&): void
+  + undo(): void
+  + find_by_article(article: const std::string&): const Component&
+  + find_by_article_bst(article: const std::string&): const Component*
+  + display_sku_tree(os: std::ostream&): void
+  + all(): std::vector<const Component*>
+  + filter_by_category(category_id: int): std::vector<const Component*>
+  + filter_by_department(dept: Department): std::vector<const Component*>
+  + filter_low_stock(threshold: int): std::vector<const Component*>
+  + search_by_manufacturer(text: const std::string&): std::vector<const Component*>
+  + search_by_name(text: const std::string&): std::vector<const Component*>
+  + search_by_price(lo: double, hi: double): std::vector<const Component*>
+  + sorted(key: SortKey, own_algorithm: bool): std::vector<const Component*>
+  + write_report(file: const std::string&): void
+  + modified(): bool
+  + can_undo(): bool
+}
+
+class MainApp <<utility>> {
+  + read_line(prompt: const std::string&): std::string
+  + read_int(prompt: const std::string&, lo: int, hi: int): int
+  + add_item(mgr: InventoryManager&): void
+  + edit_item(mgr: InventoryManager&): void
+  + search(mgr: const InventoryManager&): void
+  + sort_menu(mgr: const InventoryManager&): void
+  + show_filter_menu(mgr: const InventoryManager&): void
+  + main(argc: int, argv: char**): int
+}
+
+InventoryManager *-up- VectorContainer : items_
+InventoryManager *-up- BinaryTree : sku_tree_
+InventoryManager o-left- Command : history_
+InventoryManager *-right- CategoryInfo : categories_
+
+InventoryManager .down.> ComponentFactory : <<uses>>
+InventoryManager .down.> Algorithms : <<uses>>
+InventoryManager .down.> Logger : <<writes logs>>
+InventoryManager .left.> SortKey : <<uses>>
+
+MainApp .right.> InventoryManager : <<controls>>
+MainApp .down.> Role : <<authenticates>>
+
+@enduml

@@ -1,0 +1,80 @@
+@startuml 04_command_pattern
+' File: 04_command_pattern.puml
+' Module 4: Command pattern and undo subsystem
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam roundCorner 0
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classBorderThickness 1
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam backgroundColor white
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam dpi 300
+hide circle
+hide empty members
+
+abstract class Component
+class "VectorContainer<T>" as VectorContainer
+
+abstract class Command {
+  + {abstract} execute(): void
+  + {abstract} undo(): void
+  + {abstract} description(): std::string
+}
+
+class AddCommand {
+  - items_: VectorContainer<std::unique_ptr<Component> >&
+  - item_: std::unique_ptr<Component>
+  - article_: std::string
+  --
+  + execute(): void
+  + undo(): void
+  + description(): std::string
+}
+
+class RemoveCommand {
+  - items_: VectorContainer<std::unique_ptr<Component> >&
+  - index_: size_t
+  - article_: std::string
+  - removed_: std::unique_ptr<Component>
+  --
+  + execute(): void
+  + undo(): void
+  + description(): std::string
+}
+
+class EditCommand {
+  - items_: VectorContainer<std::unique_ptr<Component> >&
+  - index_: size_t
+  - field_: int
+  - value_: std::string
+  - article_: std::string
+  - old_: std::unique_ptr<Component>
+  --
+  + execute(): void
+  + undo(): void
+  + description(): std::string
+}
+
+Command <|-down- AddCommand
+Command <|-down- RemoveCommand
+Command <|-down- EditCommand
+
+AddCommand o-down- Component : owns 0..1
+RemoveCommand o-down- Component : owns 0..1
+EditCommand o-down- Component : stores backup 0..1
+
+AddCommand .down.> VectorContainer : <<modifies>>
+RemoveCommand .down.> VectorContainer : <<modifies>>
+EditCommand .down.> VectorContainer : <<modifies>>
+
+@enduml

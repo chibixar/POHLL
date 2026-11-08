@@ -1,0 +1,36 @@
+@startuml 01_exceptions
+' File: 01_exceptions.puml
+' Module 1: Exceptions hierarchy
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam roundCorner 0
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classBorderThickness 1
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam backgroundColor white
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam dpi 300
+hide circle
+hide empty members
+
+class "std::runtime_error" as RuntimeError <<external>>
+class InventoryException <<exception>>
+class ValidationException <<exception>>
+class FileException <<exception>>
+class NotFoundException <<exception>>
+
+RuntimeError <|-down- InventoryException
+InventoryException <|-down- ValidationException
+InventoryException <|-down- FileException
+InventoryException <|-down- NotFoundException
+
+@enduml

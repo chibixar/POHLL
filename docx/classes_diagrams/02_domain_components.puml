@@ -1,0 +1,150 @@
+@startuml 02_domain_components
+' File: 02_domain_components.puml
+' Module 2: Domain product hierarchy and factory
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam roundCorner 0
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classBorderThickness 1
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam backgroundColor white
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam dpi 300
+hide circle
+hide empty members
+
+enum Department <<enumeration>> {
+  Peripheral
+  Internal
+}
+
+class ValidationException <<exception>>
+class NotFoundException <<exception>>
+
+abstract class Component {
+  - id_: int
+  - article_: std::string
+  - name_: std::string
+  - manufacturer_: std::string
+  - price_: double
+  - quantity_: int
+  --
+  + id(): int
+  + article(): const std::string&
+  + name(): const std::string&
+  + manufacturer(): const std::string&
+  + price(): double
+  + quantity(): int
+  + total(): double
+  + set_id(value: int): void
+  + set_article(value: const std::string&): void
+  + set_name(value: const std::string&): void
+  + set_manufacturer(value: const std::string&): void
+  + set_price(value: double): void
+  + set_quantity(value: int): void
+  + {abstract} category_id(): int
+  + {abstract} category_name(): std::string
+  + {abstract} department(): Department
+  + field_names(): std::vector<std::string>
+  + set_field(field_no: int, value: const std::string&): void
+  + serialize(os: std::ostream&): void
+  + deserialize(is: std::istream&): void
+  + print_header(os: std::ostream&): void
+  + print_row(os: std::ostream&): void
+  + {abstract} clone(): std::unique_ptr<Component>
+  + operator==(other: const Component&): bool
+}
+
+abstract class PeripheralDevice {
+  - connection_: std::string
+  --
+  + department(): Department
+  + connection(): const std::string&
+  + set_connection(value: const std::string&): void
+}
+
+abstract class InternalHardware {
+  - tdp_: int
+  --
+  + department(): Department
+  + tdp(): int
+  + set_tdp(value: int): void
+}
+
+class Mouse {
+  - dpi_: int
+  --
+  + dpi(): int
+  + set_dpi(value: int): void
+  + category_id(): int
+  + category_name(): std::string
+  + clone(): std::unique_ptr<Component>
+}
+
+class Keyboard {
+  - switch_type_: std::string
+  --
+  + switch_type(): const std::string&
+  + set_switch_type(value: const std::string&): void
+  + category_id(): int
+  + category_name(): std::string
+  + clone(): std::unique_ptr<Component>
+}
+
+class Monitor {
+  - refresh_rate_: int
+  --
+  + refresh_rate(): int
+  + set_refresh_rate(value: int): void
+  + category_id(): int
+  + category_name(): std::string
+  + clone(): std::unique_ptr<Component>
+}
+
+class Processor {
+  - clock_mhz_: int
+  --
+  + clock_mhz(): int
+  + set_clock_mhz(value: int): void
+  + category_id(): int
+  + category_name(): std::string
+  + clone(): std::unique_ptr<Component>
+}
+
+class RAM {
+  - capacity_gb_: int
+  --
+  + capacity_gb(): int
+  + set_capacity_gb(value: int): void
+  + category_id(): int
+  + category_name(): std::string
+  + clone(): std::unique_ptr<Component>
+}
+
+class ComponentFactory <<factory>> {
+  + {static} create(category_id: int): std::unique_ptr<Component>
+}
+
+Component <|-down- PeripheralDevice
+Component <|-down- InternalHardware
+PeripheralDevice <|-down- Mouse
+PeripheralDevice <|-down- Keyboard
+PeripheralDevice <|-down- Monitor
+InternalHardware <|-down- Processor
+InternalHardware <|-down- RAM
+
+Component .right.> Department : <<uses>>
+Component .up.> ValidationException : <<throws>>
+ComponentFactory .right.> Component : <<creates>>
+ComponentFactory .up.> NotFoundException : <<throws>>
+
+@enduml

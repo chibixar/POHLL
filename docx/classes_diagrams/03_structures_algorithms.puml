@@ -1,0 +1,100 @@
+@startuml 03_structures_algorithms
+' File: 03_structures_algorithms.puml
+' Module 3: Custom data structures and algorithms
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam roundCorner 0
+skinparam defaultFontName "Times New Roman"
+skinparam defaultFontSize 13
+skinparam classFontStyle bold
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor white
+skinparam classBorderColor black
+skinparam classBorderThickness 1
+skinparam ArrowColor black
+skinparam ArrowThickness 1
+skinparam backgroundColor white
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 60
+skinparam dpi 300
+hide circle
+hide empty members
+
+abstract class Component
+
+class "VectorContainer<T>" as VectorContainer {
+  - data_: T*
+  - size_: size_t
+  - cap_: size_t
+  --
+  + reserve(new_cap: size_t): void
+  + push_back(value: T): void
+  + insert(index: size_t, value: T): void
+  + erase(index: size_t): T
+  + operator[](i: size_t): T&
+  + size(): size_t
+  + empty(): bool
+  + data(): T*
+  + begin(): Iterator
+  + end(): Iterator
+}
+
+class "VectorContainer::BasicIterator<U>" as BasicIterator {
+  - p_: U*
+  --
+  + operator*(): U&
+  + operator->(): U*
+  + operator++(): BasicIterator&
+  + operator==(o: const BasicIterator&): bool
+  + operator!=(o: const BasicIterator&): bool
+}
+
+class "BinaryTree<T>" as BinaryTree {
+  - root: Node*
+  - count: int
+  --
+  - copyNode(node: const Node*): Node*
+  - clearNode(node: Node*): void
+  - insertNode(node: Node*, value: const T&, added: bool&): Node*
+  - removeNode(node: Node*, value: const T&, removed: bool&): Node*
+  - findNode(node: const Node*, value: const T&): const Node*
+  - findMin(node: Node*): Node*
+  - printSideways(node: const Node*, level: int, os: std::ostream&): void
+  + add(value: const T&): bool
+  + remove(value: const T&): bool
+  + find(value: const T&): const T*
+  + print(os: std::ostream&): void
+  + clear(): void
+  + size(): int
+  + isEmpty(): bool
+}
+
+class "BinaryTree::Node" as TreeNode <<struct>> {
+  + data: T
+  + left: Node*
+  + right: Node*
+}
+
+class SkuRecord <<struct>> {
+  + article: std::string
+  + component: const Component*
+  --
+  + operator<(o: const SkuRecord&): bool
+  + operator==(o: const SkuRecord&): bool
+}
+
+class Algorithms <<utility>> {
+  + {static} find_if_own(first: It, last: It, pred: Pred): It
+  + {static} count_if_own(first: It, last: It, pred: Pred): size_t
+  + {static} sort_own(first: It, last: It, less: Less): void
+}
+
+VectorContainer *-right- BasicIterator : <<nested>>
+BinaryTree *-down- TreeNode : <<nested>>
+TreeNode -right-> TreeNode : left, right
+BinaryTree .right.> SkuRecord : <<bind T>>
+SkuRecord -down-> Component : references
+
+@enduml
